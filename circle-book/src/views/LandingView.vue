@@ -51,7 +51,15 @@ onMounted(async ()=>{
     width: 100%;
     position: relative;
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: column wrap;
+}
+@media (min-width: 1024px) {
+    .main {
+        width: 100%;
+        position: relative;
+        display: flex;
+        flex-flow: row wrap;
+    }
 }
 
 .loading {

@@ -1,24 +1,23 @@
 <script setup>
-import { defineProps } from 'vue';
 
 const props = defineProps({
-  book: {
-    id: Number,
-    title: String,
-    author: String,
-    isbn: String,
-    price: Number,
-    availableStock: Number
-},
-currency: {
-    type: String,
-    default: 'NZD'
-}
+    book: {
+        id: Number,
+        title: String,
+        author: String,
+        isbn: String,
+        price: Number,
+        availableStock: Number
+    },
+    currency: {
+        type: String,
+        default: 'NZD'
+    }
 })
 </script>
 
 <template>
-    <v-col class="v-col-3">
+    <v-col class="v-col">
         <v-card class="text-center">
             <div class="d-flex justify-center">
                 <img src="@/assets/book.png" width="125" height="180" />
@@ -27,7 +26,7 @@ currency: {
                 <v-card-title class="text-subtitle-1 h-60">{{  book.title  }}</v-card-title>
                 <v-card-subtitle class="text-subtitle-2">{{  book.author  }}</v-card-subtitle>
             </v-card-item>
-            <v-card-text class="no-pd">
+            <v-card-text class="pa-0">
                 <div>{{ "$" + book.price + ' ' + currency }}</div>
                 <div class="font-weight-black" :color="(book.availableStock>0)?'black':'red'">{{ (book.availableStock > 0)? "In stock": "No Stock" }}</div>
             </v-card-text>
@@ -46,9 +45,6 @@ currency: {
 
 .v-card-actions {
     padding: 0 0.5rem;
-}
-.no-pd {
-    padding: 0;    
 }
 
 .h-60 {
