@@ -1,5 +1,6 @@
 <script setup>
 import { ref, watch, onMounted } from 'vue';
+import { useCartStore } from '@/stores/cart';
 import BookItem from '../components/BookItem.vue'
 import axios from 'axios';
 import baseURL from '../services/api';
@@ -8,6 +9,8 @@ import baseURL from '../services/api';
 const loading = ref(true);
 // books - book list 
 const books = ref({});
+// store for shopping cart
+const cartStore = useCartStore();
 onMounted(async ()=>{
     // get book list on mount
     console.log('onMounted',baseURL);
@@ -20,19 +23,25 @@ onMounted(async ()=>{
             loading.value=false;
             books.value = res.data.books;
         }else {
-            //fail 
-            // TODO: pop error
+            //fail - pop error
+            alert('Server error in buyNow' + res.data.message);
         }
     },1000)  
 });
+
+const addToCart = (id) => {
+    cartStore.addToCart(id);
+}
 </script>
 
 <template>
     <div v-if="!loading">
-        <h1>Landing Page</h1>
         <v-container class="main">
             <v-row justify="space-around">
-                <BookItem v-for="book in books" :book="book"/>
+                <BookItem v-for="book in books" 
+                :book="book"
+                :addToCart="addToCart"
+                />
             </v-row>
         </v-container>
     </div>

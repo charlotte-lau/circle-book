@@ -13,6 +13,12 @@ const props = defineProps({
     currency: {
         type: String,
         default: 'NZD'
+    },
+    addToCart: {
+        type: Function
+    },
+    buyNow: {
+        type: Function
     }
 })
 
@@ -30,8 +36,12 @@ const props = defineProps({
                     <div class="text-subtitle-2 text-grey-darken-1">Author {{  book.author  }} | ISBN {{  book.isbn  }}</div>
                     <div class="price">{{ "$" + book.price + ' ' + currency}}</div>
                     <div class="actions">
-                        <v-btn class="btn-blue mt-2" block>Add to Cart</v-btn>
-                        <v-btn class="btn-gray mt-4" block @click="">Purchase now</v-btn>
+                        <v-btn :disabled="(book.availableStock==0)" class="btn-red mt-2" block @click="addToCart(book.id)">
+                            {{ (book.availableStock>0)?'Add to Cart':'Out of Stock' }}
+                        </v-btn>
+                        <v-btn :disabled="(book.availableStock==0)" class="mt-4" block @click="buyNow(book.id)">
+                            Purchase now 
+                        </v-btn>
                     </div>
                 </div>            
             </div>

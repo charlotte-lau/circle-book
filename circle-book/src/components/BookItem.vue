@@ -12,6 +12,9 @@ const props = defineProps({
     currency: {
         type: String,
         default: 'NZD'
+    },
+    addToCart: {
+        type: Function
     }
 })
 </script>
@@ -28,10 +31,10 @@ const props = defineProps({
             </v-card-item>
             <v-card-text class="pa-0">
                 <div>{{ "$" + book.price + ' ' + currency }}</div>
-                <div class="font-weight-black" :color="(book.availableStock>0)?'black':'red'">{{ (book.availableStock > 0)? "In stock": "No Stock" }}</div>
+                <div class="font-weight-black" :class="(book.availableStock>0)?'text-black':'text-red'">{{ (book.availableStock > 0)? "In stock": "No Stock" }}</div>
             </v-card-text>
             <v-card-actions class="d-flex flex-column">
-                <v-btn class="btn-blue" block>Add to Cart</v-btn>
+                <v-btn class="btn-red" :disabled="(book.availableStock==0)" block @click="addToCart(book.id)">Add to Cart</v-btn>
                 <v-btn class="btn-gray" block @click="$router.push('detail/'+book.id)">Detail</v-btn>
             </v-card-actions>
         </v-card>
@@ -49,16 +52,6 @@ const props = defineProps({
 
 .h-60 {
     height: 60px 
-}
-
-.btn-blue {
-    background-color: #F44336;
-    color: white;
-}
-
-.btn-gray {
-    background-color: #999999;
-    color: white;
 }
 
 button {
