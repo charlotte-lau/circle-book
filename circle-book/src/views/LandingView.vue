@@ -13,11 +13,10 @@ const books = ref({});
 const cartStore = useCartStore();
 onMounted(async ()=>{
     // get book list on mount
-    console.log('onMounted',baseURL);
     const res = await axios.get(baseURL + '/books');
     // this timeout is to demo slow loading 
     setTimeout(()=>{
-        console.log('fill called, book: ', res);
+        if (import.meta.env.DEV) console.log('fill called, book: ', res);
         if (res.status == 200){
             // success
             loading.value=false;

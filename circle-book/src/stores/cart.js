@@ -17,14 +17,12 @@ export const useCartStore = defineStore('cart', {
           count+=state.list[values];
         }
      }
-     console.log(count);
      return count
       
     }
   },
   actions: {
     addToCart(id) {
-      console.log(this.cartList);
       if (typeof(this.list[id]) != 'undefined'){
         this.list[id] += 1;
       }else {
