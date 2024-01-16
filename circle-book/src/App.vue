@@ -14,7 +14,6 @@ const goToCart = () =>{
 <template>
   <header>
     <Banner 
-      logo="/src/assets/icons/logo.png" 
       title="Circle Book Shop" 
       :totalBooks="cartStore.count"
       :goToCart="goToCart"/> 

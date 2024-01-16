@@ -7,10 +7,6 @@ const props = defineProps({
         type: String,
         default: 'Title'
     },
-    logo: {
-        type: String,
-        default: ''
-    },
     totalBooks: {
         type: Number,
         default: 0
@@ -24,8 +20,8 @@ const props = defineProps({
 <template>
 <div class="container d-flex bg pa-2">
     <div class="left">
-        <div v-if="logo != ''" class="logo"><img :src="logo"/></div>
-        <div class="text-h4 banner">{{ title }}</div>
+        <img src="/src/assets/icons/logo.png"/>
+        <div class="text-h4 banner pl-1">{{ title }}</div>
     </div>
     <div class="icon pr-2">        
         <div @click="goToCart"><svg-icon type="mdi" :path="mdiCart"></svg-icon>{{ totalBooks }}</div>
